@@ -23,7 +23,7 @@
 
 <p align="center">
   <a href="https://umit8104.pythonanywhere.com/swagger/">
-    <img src="./assets/rent-a-car-rest-api.gif" alt="Interactive Swagger Documentation" width="700"/>
+    <img src="./assets/rent-a-car.gif" alt="Interactive Swagger Documentation" width="700"/>
   </a>
 </p>
 
