@@ -38,9 +38,12 @@ except ImportError:
 class JWTSchemaGenerator(OpenAPISchemaGenerator):
     def get_schema(self, request=None, public=False):
         schema = super().get_schema(request, public)
-        # PythonAnywhere ve benzeri canlı ortamlarda protokol çakışmasını önlemek için
-        # Yereldeysek HTTP, canlıdaysak HTTPS öncelikli olsun
-        if config("ENV_NAME", default="dev") == "prod":
+
+        # PythonAnywhere üzerindeysek veya prod ise HTTPS öncelikli olmalı
+        # request.get_host() ile nerede olduğumuzu anlayabiliriz
+        host = request.get_host() if request else ""
+
+        if "pythonanywhere" in host or config("ENV_NAME", default="dev") == "prod":
             schema.schemes = ["https", "http"]
         else:
             schema.schemes = ["http", "https"]
@@ -88,4 +91,3 @@ if config("ENV_NAME", default="dev") != "prod":
 # 3. Media Dosyaları (Geliştirme aşamasında resimlerin görünmesi için)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    

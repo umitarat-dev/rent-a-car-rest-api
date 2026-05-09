@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # drf_package
+    'corsheaders',
     'rest_framework',
     'dj_rest_auth',
     'rest_framework.authtoken',
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # EN ÜSTTE OLMALI
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,3 +149,5 @@ REST_FRAMEWORK = {
 REST_AUTH = {
     'TOKEN_SERIALIZER': 'users.serializers.CustomTokenSerializer',
 }
+
+CORS_ALLOW_ALL_ORIGINS = True # Test aşaması için her yerden erişime izin veriyoruz
